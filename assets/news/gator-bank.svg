@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2a52"/><stop offset="1" stop-color="#150f26"/></linearGradient></defs>
+<rect width="800" height="450" fill="url(#w)"/>
+<!-- fachada do banco -->
+<rect x="120" y="90" width="560" height="260" fill="#241a3a"/>
+<path d="M100 90 L400 30 L700 90z" fill="#31223e"/>
+<g fill="#ffdf80" opacity=".9"><rect x="170" y="150" width="14" height="190"/><rect x="250" y="150" width="14" height="190"/><rect x="536" y="150" width="14" height="190"/><rect x="616" y="150" width="14" height="190"/></g>
+<rect x="320" y="140" width="160" height="210" fill="#0d0c1a"/>
+<text x="400" y="118" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="26" fill="#ffdf80" letter-spacing="6">BANK</text>
+<!-- chão -->
+<rect y="350" width="800" height="100" fill="#1b1230"/>
+<g fill="#ffffff" opacity=".12"><rect y="380" width="800" height="3"/><rect y="410" width="800" height="3"/></g>
+<!-- jacaré -->
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 0; 14 0; 0 0" dur="5s" repeatCount="indefinite"/>
+<path d="M260 372 q30 -34 90 -26 l70 6 q60 -34 130 -6 q-20 22 -80 26 q70 -6 130 12 q-40 30 -120 14 q-60 14 -120 4 q-60 14 -100 -10z" fill="#3c7a48"/>
+<path d="M260 372 q-30 6 -50 -4 q30 -2 50 -10z" fill="#2f6139"/>
+<circle cx="318" cy="352" r="6" fill="#ffdf80"/><circle cx="318" cy="352" r="2.4" fill="#0d0c1a"/>
+<g fill="#cfe9c8"><path d="M215 366 l6 6 l6 -6z"/><path d="M232 368 l6 6 l6 -6z"/></g>
+<g fill="#2f6139"><path d="M380 344 l8 -12 l8 12z"/><path d="M420 346 l8 -12 l8 12z"/><path d="M460 346 l8 -12 l8 12z"/><path d="M500 348 l8 -12 l8 12z"/></g>
+</g>
+<!-- sirene piscando -->
+<circle cx="90" cy="70" r="14" fill="#e5233a"><animate attributeName="opacity" values="1;.15;1" dur="1.2s" repeatCount="indefinite"/></circle>
+<circle cx="710" cy="70" r="14" fill="#47a0ff"><animate attributeName="opacity" values=".15;1;.15" dur="1.2s" repeatCount="indefinite"/></circle>
+</svg>

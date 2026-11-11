@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b0a1c"/><stop offset="1" stop-color="#2a1745"/></linearGradient>
+<linearGradient id="p" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#47e0ff"/><stop offset="1" stop-color="#1a7fa8"/></linearGradient></defs>
+<rect width="800" height="450" fill="url(#s)"/>
+<!-- motel -->
+<rect x="60" y="130" width="680" height="170" fill="#1f1f38"/>
+<g fill="#ffdf80" opacity=".85"><rect x="100" y="170" width="50" height="60"/><rect x="200" y="170" width="50" height="60"/><rect x="550" y="170" width="50" height="60"/><rect x="650" y="170" width="50" height="60"/></g>
+<rect x="300" y="100" width="200" height="40" rx="4" fill="#0d0c1a"/>
+<text x="400" y="128" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="22" fill="#ff4f8b" letter-spacing="5">MOTEL<animate attributeName="opacity" values="1;.4;1;1;.6;1" dur="2.4s" repeatCount="indefinite"/></text>
+<!-- piscina -->
+<rect y="300" width="800" height="150" fill="#120d20"/>
+<rect x="160" y="320" width="480" height="100" rx="10" fill="url(#p)"/>
+<g stroke="#fff" opacity=".35" fill="none"><path d="M180 345 q30 -10 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0"><animateTransform attributeName="transform" type="translate" values="0 0;-30 0;0 0" dur="3s" repeatCount="indefinite"/></path></g>
+<!-- carro mergulhado -->
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 0;0 6;0 0" dur="2.2s" repeatCount="indefinite"/>
+<path d="M290 362 l40 -28 h110 l50 28z" fill="#e5233a"/>
+<rect x="270" y="360" width="250" height="26" rx="8" fill="#e5233a"/>
+<path d="M345 338 h40 v22 h-62z M395 338 h38 l30 22 h-68z" fill="#47e0ff" opacity=".7"/>
+<circle cx="320" cy="388" r="14" fill="#0d0c1a"/><circle cx="470" cy="388" r="14" fill="#0d0c1a"/>
+</g>
+<!-- respingos -->
+<g fill="#bff3ff" opacity=".8">
+<circle cx="260" cy="330" r="5"><animate attributeName="cy" values="330;290;330" dur="1.4s" repeatCount="indefinite"/></circle>
+<circle cx="540" cy="335" r="4"><animate attributeName="cy" values="335;295;335" dur="1.1s" repeatCount="indefinite"/></circle>
+<circle cx="500" cy="325" r="3"><animate attributeName="cy" values="325;280;325" dur="1.7s" repeatCount="indefinite"/></circle>
+</g>
+<!-- giroflex -->
+<circle cx="60" cy="60" r="16" fill="#e5233a"><animate attributeName="opacity" values="1;.1;1" dur="1s" repeatCount="indefinite"/></circle>
+<circle cx="740" cy="60" r="16" fill="#47a0ff"><animate attributeName="opacity" values=".1;1;.1" dur="1s" repeatCount="indefinite"/></circle>
+</svg>

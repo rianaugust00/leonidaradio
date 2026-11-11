@@ -1,6 +1,24 @@
 (() => {
   const S = window.STATIONS;
-  const P = window.PLAYLISTS || {};
+  const L = window.LOCUTORES || {};
+  const EVERY = 2; // uma fala do locutor a cada N músicas
+
+  // Grade fixa: músicas com falas intercaladas, em ordem cíclica.
+  // É determinística, então todos os ouvintes continuam sincronizados.
+  const P = {};
+  Object.entries(window.PLAYLISTS || {}).forEach(([sid, music]) => {
+    const clips = L[sid] || [];
+    if (!clips.length) { P[sid] = music; return; }
+    const out = []; let k = 0;
+    music.forEach((m, i) => {
+      out.push(m);
+      if ((i + 1) % EVERY === 0) {
+        const c = clips[k++ % clips.length];
+        out.push({ dj: true, title: c.dj, artist: "Locutor", duration: c.duration, src: c.src });
+      }
+    });
+    P[sid] = out;
+  });
   const $ = (id) => document.getElementById(id);
   const audio = $("audio"), player = $("player"), grid = $("grid");
   const logo = (s) => `assets/logos/${s.id}.png`;
@@ -53,7 +71,7 @@
   function refreshCards() {
     S.forEach((s, i) => {
       const n = nowOn(s.id);
-      cards[i].querySelector(".now b").textContent = n ? `${n.track.title} — ${n.track.artist}` : "Sem programação";
+      cards[i].querySelector(".now b").textContent = n ? (n.track.dj ? `🎙 ${n.track.title}` : `${n.track.title} — ${n.track.artist}`) : "Sem programação";
     });
   }
 
@@ -63,10 +81,10 @@
 
   function showTrack(t) {
     track = t;
-    $("pTrack").textContent = t ? `${t.title} — ${t.artist}` : "Sem programação: rode tools/build_playlists.py";
+    $("pTrack").textContent = t ? (t.dj ? `🎙 ${t.title}` : `${t.title} — ${t.artist}`) : "Sem programação: rode tools/build_playlists.py";
     const a = $("pCredit");
-    a.textContent = t ? "Licença Creative Commons · Jamendo" : "";
-    if (t) a.href = t.license || t.page || "#"; else a.removeAttribute("href");
+    a.textContent = t ? (t.dj ? "Locutor da estação" : "Licença Creative Commons · Jamendo") : "";
+    if (t && !t.dj) a.href = t.license || t.page || "#"; else a.removeAttribute("href");
   }
 
   function setPlaying(on) {

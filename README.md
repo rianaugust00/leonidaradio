@@ -55,9 +55,14 @@ app.js                   player e lógica da programação ao vivo
 stations.js              estações: nome, gênero, locutores, cores e tags
 playlists.js             playlists geradas (não editar à mão)
 tools/build_playlists.py gera playlists.js a partir do Jamendo
+noticias.js              notícias fictícias (tela #noticias do index.html, renderizada por noticias-app.js)
+noticias.html            redireciona para index.html#noticias
+assets/news/             ilustrações das notícias (SVG)
 assets/logos/            logos das estações
 assets/bg/               imagens de fundo
-locutores/               falas dos locutores (formato "DJ | fala")
+locutores/texts/         falas dos locutores (formato "DJ | fala")
+locutores/audios/<est>/  áudios das falas (N.mp3 = linha N do .txt)
+locutores.js             falas + durações (gerado por tools/build_locutores.py)
 ```
 
 ## Próximos passos

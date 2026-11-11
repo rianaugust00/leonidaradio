@@ -10,16 +10,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="noticias.css">
+  <link rel="stylesheet" href="fx.css">
 </head>
 <body>
   <a class="skip" href="#stations">Pular para as estações</a>
 
   <header class="nav">
     <a class="brand" href="#top"><span class="vi">VI</span><span>Rádio Leonida</span></a>
-    <span class="tag">Projeto de fã · não oficial</span>
+    <nav class="links"><a href="#top" id="navRadio" aria-current="page">Rádio</a><a href="#noticias" id="navNews">Notícias</a></nav>
   </header>
 
   <main id="top">
+    <div id="view-radio">
     <section class="hero">
       <div class="hero-inner">
         <p class="eyebrow">Rádio</p>
@@ -40,6 +43,21 @@
       </header>
       <div class="grid" id="grid"></div>
     </section>
+    </div>
+
+    <div id="view-news" hidden>
+<section class="news-head">
+      <p class="eyebrow">Vice City Dispatch</p>
+      <h1>Notícias de <em>Leonida</em></h1>
+      <p class="lead">Tudo o que acontece no estado mais quente do país. Todas as matérias são fictícias e feitas por fãs.</p>
+      <div class="filters" id="filters" role="group" aria-label="Filtrar por categoria"></div>
+    </section>
+
+    <section class="news-wrap">
+      <article class="featured" id="featured"></article>
+      <div class="news-grid" id="newsGrid"></div>
+    </section>
+    </div>
   </main>
 
   <footer class="foot">
@@ -76,6 +94,11 @@
   <audio id="audio" preload="none"></audio>
   <script src="stations.js"></script>
   <script src="playlists.js"></script>
+  <script src="locutores.js"></script>
   <script src="app.js"></script>
+  <script src="noticias.js"></script>
+  <script src="noticias-credits.js"></script>
+  <script src="noticias-app.js"></script>
+  <script src="fx.js"></script>
 </body>
 </html>
