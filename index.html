@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rádio Leonida — Estações de GTA VI (fan-made)</title>
+  <meta name="description" content="Rádio online fã-feita inspirada nas estações de GTA VI, 24 horas no ar com música Creative Commons.">
+  <meta name="theme-color" content="#0d0c1a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#stations">Pular para as estações</a>
+
+  <header class="nav">
+    <a class="brand" href="#top"><span class="vi">VI</span><span>Rádio Leonida</span></a>
+    <span class="tag">Projeto de fã · não oficial</span>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow">Rádio</p>
+        <h1>Ao vivo em toda <em>Leonida</em></h1>
+        <p class="lead">Seis estações no ar 24 horas por dia, do reggaeton de Vice City ao metal dos pântanos. Escolha uma estação e sintonize no que está tocando agora.</p>
+        <button class="cta" id="heroPlay" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          Ligar o rádio
+        </button>
+      </div>
+      <div class="scroll" aria-hidden="true">Role para ver as estações</div>
+    </section>
+
+    <section class="stations" id="stations" aria-labelledby="st-title">
+      <header class="section-head">
+        <p class="eyebrow">Estações</p>
+        <h2 id="st-title">Sintonize</h2>
+      </header>
+      <div class="grid" id="grid"></div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p><strong>Rádio Leonida</strong> é um projeto de fã, sem afiliação com a Rockstar Games ou a Take-Two. Nomes e logos das estações pertencem aos seus donos.</p>
+    <p>As músicas são de artistas independentes, com licença Creative Commons, via <a href="https://www.jamendo.com" target="_blank" rel="noopener">Jamendo</a>. O crédito de cada faixa aparece no player.</p>
+  </footer>
+
+  <!-- Player fixo -->
+  <div class="player" id="player" aria-label="Player">
+    <div class="p-progress" aria-hidden="true"><i id="bar"></i></div>
+    <div class="p-now">
+      <img id="pLogo" alt="" width="56" height="56">
+      <div class="p-text">
+        <p class="p-station"><span class="live" id="live">Ao vivo</span><span id="pStation">—</span></p>
+        <p class="p-track" id="pTrack">Escolha uma estação</p>
+        <a class="p-credit" id="pCredit" target="_blank" rel="noopener"></a>
+      </div>
+    </div>
+    <div class="p-ctrl">
+      <button id="prev" type="button" aria-label="Estação anterior"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg></button>
+      <button id="play" class="play" type="button" aria-label="Tocar"><svg viewBox="0 0 24 24" id="playIcon"><path d="M8 5v14l11-7z"/></svg></button>
+      <button id="next" type="button" aria-label="Próxima estação"><svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6zm10-12v12h2V6z"/></svg></button>
+    </div>
+    <div class="p-side">
+      <span class="time" id="time">0:00 / 0:00</span>
+      <label class="vol"><span class="sr">Volume</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4z"/></svg>
+        <input id="vol" type="range" min="0" max="1" step="0.01" value="0.8">
+      </label>
+    </div>
+    <p class="sr" id="status" aria-live="polite"></p>
+  </div>
+
+  <audio id="audio" preload="none"></audio>
+  <script src="stations.js"></script>
+  <script src="playlists.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
