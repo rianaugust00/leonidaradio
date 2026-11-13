@@ -48,6 +48,8 @@ O script descarta covers, remixes e música de banco de som, e exige que o gêne
 
 ## Estrutura
 
+Documentação técnica completa: [docs/DOCUMENTACAO.md](docs/DOCUMENTACAO.md)
+
 ```
 index.html               página
 style.css                visual (inspirado na página de música de GTA VI)
@@ -70,6 +72,16 @@ locutores.js             falas + durações (gerado por tools/build_locutores.py
 - [ ] Gerar as vozes dos locutores com IA (ElevenLabs ou OpenAI TTS) a partir de `locutores/`
 - [ ] Tocar as falas entre as músicas, mantendo a sincronia ao vivo
 - [ ] (Opcional) Stream 24/7 em servidor próprio (Icecast + Liquidsoap ou AzuraCast)
+
+### Ideias futuras
+
+- [ ] **Efeito de troca de estação:** chiado de estática curto (~0,5 s) ao mudar de estação, gerado com a Web Audio API (sem arquivo)
+- [ ] **Vinhetas e jingles:** clipes curtos com o nome da estação, intercalados na grade com frequência própria (ex.: a cada 5 músicas)
+- [ ] **Falas por horário:** falas de manhã, tarde e madrugada escolhidas pelo relógio, marcadas no `.txt` (ex.: `manhã | DJ | fala`)
+- [ ] **Comerciais fictícios:** anúncios paródicos de empresas inventadas de Leonida, inseridos na grade como as falas
+- [ ] **Boletim de notícias falado:** locutor lê as manchetes de `noticias.js` na rádio, ligando as duas partes do site
+- [ ] **Visualizador de áudio:** espectro com `AnalyserNode` nas cores da estação (verificar CORS do áudio do Jamendo)
+- [ ] **PWA:** instalar no celular, com ícone e tela cheia
 
 ## Créditos
 
