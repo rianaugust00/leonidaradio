@@ -311,7 +311,24 @@ python3 -m http.server       # na raiz do projeto
 
 Abrir o `index.html` direto pelo arquivo (`file://`) costuma funcionar, mas um servidor local evita problemas do navegador com áudio e caminhos.
 
-**Publicação:** como é tudo estático, basta enviar a pasta para GitHub Pages, Netlify, Vercel ou Cloudflare Pages, sem build. No GitHub Pages: *Settings → Pages → Deploy from branch → main / root*.
+**Publicação (GitHub Pages):** o site é servido direto da branch `main`, sem build.
+
+1. No GitHub: *Settings → Pages → Build and deployment → Source: Deploy from a branch → `main` / `(root)` → Save*. Só precisa ser feito uma vez.
+2. A cada `git push` na `main`, o site é atualizado em 1 a 2 minutos em <https://rianaugust00.github.io/leonidaradio/>.
+
+Arquivos que existem por causa da publicação:
+
+| Arquivo | Função |
+|---|---|
+| `.nojekyll` | Faz o Pages servir os arquivos como estão, sem passar pelo Jekyll |
+| `404.html` | Página de erro com link de volta para a rádio |
+| `favicon.svg` | Ícone da aba |
+| `manifest.webmanifest` | Nome, cores e ícone ao instalar o site no celular |
+| Tags `og:*` e `canonical` no `index.html` | Prévia com imagem ao compartilhar o link |
+
+> O endereço `https://rianaugust00.github.io/leonidaradio/` aparece nas tags `canonical` e `og:*` do `index.html` e nos links do `404.html`. Se o site mudar de endereço (domínio próprio, Netlify etc.), atualize esses dois arquivos.
+
+Todos os caminhos do site são relativos, então ele funciona tanto na subpasta `/leonidaradio/` quanto na raiz de um domínio próprio.
 
 ## 13. Licenças e aspectos legais
 

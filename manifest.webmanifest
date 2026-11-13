@@ -1,0 +1,14 @@
+{
+  "name": "Rádio Leonida",
+  "short_name": "Rádio Leonida",
+  "description": "Rádio online fã-feita inspirada nas estações de GTA VI, 24 horas no ar com música Creative Commons.",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d0c1a",
+  "theme_color": "#0d0c1a",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
