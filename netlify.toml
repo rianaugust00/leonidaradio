@@ -1,0 +1,39 @@
+# Configuração do Netlify — site estático, sem build.
+[build]
+  publish = "."
+  command = ""
+
+# /noticias (sem .html) também leva à tela de notícias
+[[redirects]]
+  from = "/noticias"
+  to = "/index.html#noticias"
+  status = 301
+
+# Cabeçalhos de segurança em todas as páginas
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Imagens e áudios mudam pouco: cache de 7 dias no navegador.
+# HTML, CSS e JS ficam com o padrão do Netlify (sempre revalida),
+# para que uma playlist nova chegue na hora aos ouvintes.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/locutores/audios/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# Arquivos internos que não precisam ir para o ar
+[[redirects]]
+  from = "/tools/*"
+  to = "/404.html"
+  status = 404
+  force = true

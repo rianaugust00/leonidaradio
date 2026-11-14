@@ -52,6 +52,8 @@ Documentação técnica completa: [docs/DOCUMENTACAO.md](docs/DOCUMENTACAO.md)
 
 ```
 index.html               página
+netlify.toml             configuração de deploy no Netlify
+404.html                 página de erro
 style.css                visual (inspirado na página de música de GTA VI)
 app.js                   player e lógica da programação ao vivo
 stations.js              estações: nome, gênero, locutores, cores e tags

@@ -326,9 +326,23 @@ Arquivos que existem por causa da publicação:
 | `manifest.webmanifest` | Nome, cores e ícone ao instalar o site no celular |
 | Tags `og:*` e `canonical` no `index.html` | Prévia com imagem ao compartilhar o link |
 
-> O endereço `https://rianaugust00.github.io/leonidaradio/` aparece nas tags `canonical` e `og:*` do `index.html` e nos links do `404.html`. Se o site mudar de endereço (domínio próprio, Netlify etc.), atualize esses dois arquivos.
+> O endereço `https://rianaugust00.github.io/leonidaradio/` aparece nas tags `canonical` e `og:*` do `index.html`. Se o site mudar de endereço (domínio próprio, Netlify etc.), atualize essas tags.
+>
+> Os links do `404.html` apontam para a raiz (`/`), como o Netlify serve o site. No GitHub Pages (subpasta `/leonidaradio/`) eles levariam para fora do site.
 
 Todos os caminhos do site são relativos, então ele funciona tanto na subpasta `/leonidaradio/` quanto na raiz de um domínio próprio.
+
+### Netlify
+
+O `netlify.toml` na raiz já configura tudo: publica a raiz sem build, define cabeçalhos de segurança, guarda imagens e áudios em cache por 7 dias (HTML/CSS/JS sempre revalidam, para que uma playlist nova chegue na hora), redireciona `/noticias` e bloqueia `/tools/*`. Páginas inexistentes caem no `404.html`.
+
+- **Pelo GitHub (recomendado):** *Add new site → Import an existing project → GitHub → leonidaradio*. Deixe *Build command* vazio e *Publish directory* como `.`. Cada `git push` na `main` publica sozinho.
+- **Arrastando a pasta:** em <https://app.netlify.com/drop>, solte a pasta do projeto.
+- **Pela CLI:** `npx netlify-cli deploy --prod --dir .`
+
+Quando o Netlify gerar o endereço do site (ex.: `https://radio-leonida.netlify.app/`), troque o endereço do GitHub Pages pelo novo nas tags `canonical` e `og:*` do `index.html`.
+
+Depois de rodar `build_playlists.py` de novo (links do Jamendo expirados), faça commit e push do `playlists.js` para atualizar o site.
 
 ## 13. Licenças e aspectos legais
 
