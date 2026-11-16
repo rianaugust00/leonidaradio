@@ -109,8 +109,44 @@
     return true;
   }
 
+  // Chiado de estática ao trocar de estação: ruído branco filtrado, gerado
+  // na hora com a Web Audio API (sem arquivo de áudio).
+  let actx = null;
+  function staticBurst() {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC || audio.volume === 0) return;
+    try {
+      actx = actx || new AC();
+      if (actx.state === "suspended") actx.resume();
+      const dur = 0.5, t0 = actx.currentTime, n = Math.floor(actx.sampleRate * dur);
+      const buf = actx.createBuffer(1, n, actx.sampleRate), d = buf.getChannelData(0);
+      // Ruído com "estalos": a amplitude muda a cada poucos milissegundos.
+      let amp = 1;
+      for (let k = 0; k < n; k++) {
+        if (k % 400 === 0) amp = 0.45 + Math.random() * 0.55;
+        d[k] = (Math.random() * 2 - 1) * amp;
+      }
+      const src = actx.createBufferSource(), band = actx.createBiquadFilter(), gain = actx.createGain();
+      src.buffer = buf;
+      // O filtro "varre" as frequências, como um dial passando entre estações.
+      band.type = "bandpass"; band.Q.value = 0.8;
+      band.frequency.setValueAtTime(700, t0);
+      band.frequency.exponentialRampToValueAtTime(3800, t0 + dur * 0.55);
+      band.frequency.exponentialRampToValueAtTime(1500, t0 + dur);
+      const peak = 0.3 * audio.volume;
+      gain.gain.setValueAtTime(0.0001, t0);
+      gain.gain.exponentialRampToValueAtTime(peak, t0 + 0.03);
+      gain.gain.setValueAtTime(peak, t0 + dur - 0.15);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+      src.connect(band).connect(gain).connect(actx.destination);
+      src.start(t0);
+    } catch (_) {}
+  }
+
   function select(i, autoplay) {
-    cur = (i + S.length) % S.length;
+    const next = (i + S.length) % S.length;
+    if (autoplay && next !== cur) staticBurst();
+    cur = next;
     const s = S[cur];
     localStorage.setItem("gtaradio:last", cur);
     document.documentElement.style.setProperty("--a", s.colors[0]);
