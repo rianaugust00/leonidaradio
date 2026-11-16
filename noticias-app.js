@@ -65,14 +65,20 @@
   render();
 
   // Roteador por hash: troca de tela sem recarregar, então o áudio não para.
-  const vr = $("view-radio"), vn = $("view-news");
+  const VIEWS = {
+    "#noticias": { el: $("view-news"), nav: $("navNews"), title: "Vice City Dispatch — Notícias de Leonida (fan-made)" },
+    "#forum": { el: $("view-forum"), nav: $("navForum"), title: "Fórum de descobertas — Rádio Leonida (fan-made)" },
+    "": { el: $("view-radio"), nav: $("navRadio"), title: "Rádio Leonida — Estações de GTA VI (fan-made)" },
+  };
   function route() {
-    const news = location.hash === "#noticias";
-    vr.hidden = news; vn.hidden = !news;
-    $("navNews").toggleAttribute("aria-current", news);
-    $("navRadio").toggleAttribute("aria-current", !news);
-    document.title = news ? "Vice City Dispatch — Notícias de Leonida (fan-made)" : "Rádio Leonida — Estações de GTA VI (fan-made)";
-    if (news) window.scrollTo(0, 0);
+    const on = VIEWS[location.hash] || VIEWS[""];
+    Object.values(VIEWS).forEach((v) => {
+      if (!v.el) return;
+      v.el.hidden = v !== on;
+      v.nav.toggleAttribute("aria-current", v === on);
+    });
+    document.title = on.title;
+    if (on !== VIEWS[""]) window.scrollTo(0, 0);
   }
   addEventListener("hashchange", route);
   route();

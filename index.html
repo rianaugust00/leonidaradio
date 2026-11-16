@@ -24,6 +24,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="noticias.css">
+  <link rel="stylesheet" href="forum.css">
   <link rel="stylesheet" href="fx.css">
 </head>
 <body>
@@ -31,7 +32,7 @@
 
   <header class="nav">
     <a class="brand" href="#top"><span class="vi">VI</span><span>Rádio Leonida</span></a>
-    <nav class="links"><a href="#top" id="navRadio" aria-current="page">Rádio</a><a href="#noticias" id="navNews">Notícias</a></nav>
+    <nav class="links"><a href="#top" id="navRadio" aria-current="page">Rádio</a><a href="#noticias" id="navNews">Notícias</a><a href="#forum" id="navForum">Fórum</a></nav>
   </header>
 
   <main id="top">
@@ -69,6 +70,40 @@
     <section class="news-wrap">
       <article class="featured" id="featured"></article>
       <div class="news-grid" id="newsGrid"></div>
+    </section>
+    </div>
+
+    <div id="view-forum" hidden>
+    <section class="news-head forum-head">
+      <p class="eyebrow">Fórum</p>
+      <h1>Descobertas de <em>Leonida</em></h1>
+      <p class="lead">Easter eggs, locais secretos e bugs encontrados pelos jogadores. Vote no que for real.</p>
+      <p class="forum-note" id="forumDemo" hidden>Modo demonstração: o fórum ainda não está ligado a um servidor, então as postagens ficam salvas só neste navegador.</p>
+      <div class="forum-auth" id="forumAuth"></div>
+      <div class="filters" id="forumFilters" role="group" aria-label="Filtrar por categoria"></div>
+      <div class="filters" id="forumSort" role="group" aria-label="Ordenar postagens"></div>
+    </section>
+
+    <section class="forum-wrap">
+      <form class="forum-form" id="forumForm" hidden>
+        <h2>Nova postagem</h2>
+        <label>Categoria
+          <select name="category" required></select>
+        </label>
+        <label>Título
+          <input name="title" type="text" required minlength="4" maxlength="120" autocomplete="off">
+        </label>
+        <label>O que você encontrou?
+          <textarea name="body" required minlength="10" maxlength="4000" rows="6"></textarea>
+        </label>
+        <label class="check"><input name="spoiler" type="checkbox"> Contém spoiler da história</label>
+        <div class="forum-actions">
+          <button type="submit" class="btn primary">Publicar</button>
+          <button type="button" class="btn" id="forumCancel">Cancelar</button>
+        </div>
+      </form>
+      <p class="forum-msg" id="forumMsg" role="status" aria-live="polite"></p>
+      <div class="forum-list" id="forumList"></div>
     </section>
     </div>
   </main>
@@ -112,6 +147,8 @@
   <script src="noticias.js"></script>
   <script src="noticias-credits.js"></script>
   <script src="noticias-app.js"></script>
+  <script src="forum-config.js"></script>
+  <script src="forum.js"></script>
   <script src="fx.js"></script>
 </body>
 </html>

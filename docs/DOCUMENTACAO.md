@@ -25,16 +25,17 @@
 
 ## 1. Visão geral
 
-A Rádio Leonida é uma rádio online inspirada nas estações de GTA VI. O site tem duas telas:
+A Rádio Leonida é uma rádio online inspirada nas estações de GTA VI. O site tem três telas:
 
 - **Rádio:** seis estações tocando 24 h por dia, com músicas Creative Commons do Jamendo e falas de locutores intercaladas.
 - **Notícias (Vice City Dispatch):** matérias fictícias sobre Leonida, com filtro por categoria.
+- **Fórum:** descobertas dos jogadores, com categoria, spoiler e votos (em modo demonstração até o Supabase ser ligado).
 
 Todos os ouvintes ouvem **a mesma faixa no mesmo ponto**. O site não tem servidor de streaming: a posição "ao vivo" é calculada pelo relógio do navegador.
 
 | Item | Valor |
 |---|---|
-| Tipo | Site estático (HTML + CSS + JavaScript puro, sem build e sem dependências) |
+| Tipo | Site estático (HTML + CSS + JavaScript puro, sem build). A única dependência é o cliente do Supabase, carregado por CDN só quando o fórum está configurado |
 | Áudio | Arquivos MP3 do Jamendo (músicas) e locais (locutores) |
 | Ferramentas | Python 3 (scripts em `tools/`) |
 | Idioma da interface | Português (pt-BR) |
@@ -84,6 +85,9 @@ Cada script de lógica é uma IIFE `(() => { ... })()` e não deixa variáveis g
 | `noticias.js` | Matérias (`window.NEWS`) | Sim |
 | `noticias-credits.js` | Créditos das fotos (`window.NEWS_CREDITS`) | Sim |
 | `noticias-app.js` | Renderiza as notícias e troca de tela | Sim |
+| `forum.js` / `forum.css` | Tela do fórum | Sim |
+| `forum-config.js` | URL e chave `anon` do Supabase; vazio = modo demonstração | Sim |
+| `supabase/schema.sql` | Tabelas, gatilho de placar e regras de RLS do fórum | Sim |
 | `tools/build_playlists.py` | Gera `playlists.js` a partir do Jamendo | Sim |
 | `tools/build_locutores.py` | Gera `locutores.js` | Sim |
 | `assets/logos/<id>.png` | Logo de cada estação | — |
@@ -215,13 +219,22 @@ Detalhes:
 
 ## 7. Notícias e navegação
 
-- `index.html` contém as duas telas: `#view-radio` e `#view-news`.
-- `noticias-app.js` tem um **roteador por hash**: `#noticias` mostra as notícias e qualquer outro hash mostra a rádio. Como a página nunca recarrega, **o áudio continua tocando** ao navegar.
+- `index.html` contém as três telas: `#view-radio`, `#view-news` e `#view-forum`.
+- `noticias-app.js` tem um **roteador por hash**: `#noticias` mostra as notícias, `#forum` mostra o fórum e qualquer outro hash mostra a rádio. Como a página nunca recarrega, **o áudio continua tocando** ao navegar.
 - O título da aba muda conforme a tela.
 - As notícias são ordenadas por data (mais nova primeiro). A primeira vira o destaque (`#featured`) e as demais vão para a grade (`#newsGrid`).
 - Os filtros são criados a partir das categorias existentes e usam `aria-pressed`.
 - Para a imagem, vale a foto de `NEWS_CREDITS` quando existe (com legenda de autor e licença); se não, o SVG indicado em `img`.
 - Todo o texto é inserido com `textContent`, o que evita injeção de HTML.
+
+### Fórum
+
+- `forum.js` tem duas fontes de dados com a mesma interface: `local()` (modo demonstração, tudo no `localStorage`) e `remote()` (Supabase). Vale a segunda quando `forum-config.js` tem `url` e `anonKey`.
+- **Login (Supabase):** link mágico por e-mail. No primeiro acesso a pessoa escolhe um apelido (tabela `profiles`); o e-mail nunca aparece.
+- **Votos:** um por usuário em cada postagem (tabela `votes`). O placar (`posts.score`) é mantido por um gatilho no banco.
+- **Segurança:** o navegador só pode gravar `category`, `title`, `body` e `spoiler`. `author`, `score` e `confirmed` não podem ser forjados (permissões por coluna + RLS em `supabase/schema.sql`). O selo "confirmado" é marcado pela moderação no painel do Supabase.
+- **Para ligar:** criar o projeto no Supabase, rodar `supabase/schema.sql` no SQL Editor, pôr o endereço do site em Authentication > URL Configuration e preencher `forum-config.js`.
+- **Ainda não feito:** pinos no mapa, upload de imagem, denúncia e moderação, termos de uso e política de privacidade.
 
 ## 8. Animações (fx)
 
@@ -377,7 +390,7 @@ Depois de rodar `build_playlists.py` de novo (links do Jamendo expirados), faça
 
 As ideias de curto prazo estão no [README](../README.md#próximos-passos). Direções maiores em discussão:
 
-1. **Fórum de descobertas dos jogadores:** postagens com categorias (descoberta, easter egg, bug, local), tag de spoiler, votos e selo de "confirmado", pinos no mapa de Leonida. Backend sugerido: Supabase (login, banco e upload).
+1. **Fórum de descobertas dos jogadores (iniciado, ver seção 7):** postagens com categorias (descoberta, easter egg, bug, local), tag de spoiler, votos e selo de "confirmado", pinos no mapa de Leonida. Backend sugerido: Supabase (login, banco e upload).
 2. **Ligar o fórum à tela de notícias:** as postagens mais votadas viram manchetes.
 3. **Boletim falado:** os locutores leem as manchetes em destaque na rádio.
 4. **Automação:** um GitHub Action semanal para regenerar `playlists.js`, e deploy no GitHub Pages.

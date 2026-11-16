@@ -9,6 +9,12 @@
   to = "/index.html#noticias"
   status = 301
 
+# /forum (sem .html) leva à tela do fórum
+[[redirects]]
+  from = "/forum"
+  to = "/index.html#forum"
+  status = 301
+
 # Cabeçalhos de segurança em todas as páginas
 [[headers]]
   for = "/*"
@@ -34,6 +40,12 @@
 # Arquivos internos que não precisam ir para o ar
 [[redirects]]
   from = "/tools/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/supabase/*"
   to = "/404.html"
   status = 404
   force = true

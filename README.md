@@ -67,6 +67,9 @@ assets/bg/               imagens de fundo
 locutores/texts/         falas dos locutores (formato "DJ | fala")
 locutores/audios/<est>/  áudios das falas (N.mp3 = linha N do .txt)
 locutores.js             falas + durações (gerado por tools/build_locutores.py)
+forum.js / forum.css     fórum de descobertas (tela #forum do index.html)
+forum-config.js          endereço e chave pública do Supabase (vazio = modo demonstração)
+supabase/schema.sql      tabelas e regras de acesso do fórum
 ```
 
 ## Próximos passos
@@ -77,12 +80,13 @@ locutores.js             falas + durações (gerado por tools/build_locutores.py
 
 ### Ideias futuras
 
-- [ ] **Efeito de troca de estação:** chiado de estática curto (~0,5 s) ao mudar de estação, gerado com a Web Audio API (sem arquivo)
+- [x] **Efeito de troca de estação:** chiado de estática curto (~0,5 s) ao mudar de estação, gerado com a Web Audio API (sem arquivo)
 - [ ] **Vinhetas e jingles:** clipes curtos com o nome da estação, intercalados na grade com frequência própria (ex.: a cada 5 músicas)
 - [ ] **Falas por horário:** falas de manhã, tarde e madrugada escolhidas pelo relógio, marcadas no `.txt` (ex.: `manhã | DJ | fala`)
 - [ ] **Comerciais fictícios:** anúncios paródicos de empresas inventadas de Leonida, inseridos na grade como as falas
 - [ ] **Boletim de notícias falado:** locutor lê as manchetes de `noticias.js` na rádio, ligando as duas partes do site
 - [ ] **Visualizador de áudio:** espectro com `AnalyserNode` nas cores da estação (verificar CORS do áudio do Jamendo)
+- [ ] **Fórum de descobertas:** a tela `#forum` já funciona em modo demonstração (dados no navegador). Falta criar o projeto no Supabase, rodar `supabase/schema.sql` e preencher `forum-config.js`; antes de abrir ao público, falta também moderação, termos de uso e política de privacidade
 - [ ] **PWA:** instalar no celular, com ícone e tela cheia
 
 ## Créditos
